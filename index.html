@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mini Geometry Dash</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Import map placeholder (no external libs used but kept for compatibility) -->
+  <script type="importmap">
+  {
+    "imports": {}
+  }
+  </script>
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="hud">
+    <div id="score">0</div>
+    <button id="mute" aria-label="mute">🔊</button>
+    <button id="editor-toggle" title="Editor">✏️</button>
+  </div>
+
+  <div id="overlay" class="hidden">
+    <div id="overlay-card">
+      <div id="message">Ready</div>
+      <div id="best">Best: 0</div>
+      <div id="controls">
+        <button id="play">Play</button>
+        <button id="restart" class="hidden">Restart</button>
+        <button id="ubuntu" class="secondary" aria-label="ubuntu">
+          <img id="soggy-img" src="/soggycat.webp" alt="soggycat" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editor modal -->
+  <div id="editor" class="hidden" role="dialog" aria-modal="true">
+    <div id="editor-card">
+      <div id="editor-header">
+        <div id="editor-title">Level Editor</div>
+        <button id="editor-close" aria-label="close">✕</button>
+      </div>
+      <div id="editor-tools">
+        <button data-tool="place-rect" class="tool active">Place Block</button>
+        <button data-tool="place-circle" class="tool">Place Circle</button>
+        <button data-tool="erase" class="tool">Erase</button>
+        <button id="preset-nine" class="tool">Nine Circles</button>
+      </div>
+      <div id="editor-actions">
+        <button id="export-json">Export JSON</button>
+        <button id="upload-level" class="primary">Upload</button>
+        <button id="clear-level" class="secondary">Clear</button>
+        <button id="browse-levels" class="secondary">Browse</button>
+      </div>
+      <div id="editor-hint">Tap canvas to add items. Drag to move items. Long-press to remove.</div>
+    </div>
+  </div>
+
+  <!-- Browse modal for loading other people's levels -->
+  <div id="browse" class="hidden" role="dialog" aria-modal="true">
+    <div id="browse-card">
+      <div id="browse-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-weight:800">Browse Levels</div>
+        <button id="browse-close" aria-label="close">✕</button>
+      </div>
+      <div id="endpoints-tabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <button data-endpoint="https://fgdpsrp.ps.fhgdps.com/dashboard/levels" class="endpoint">fgdpsrp (https) /dashboard/levels</button>
+        <button data-endpoint="/dashboard/levels" class="endpoint">/dashboard/levels (app)</button>
+        <button data-endpoint="http://fgdpsrp.ps.fhgdps.com/dashboard/levels" class="endpoint">fgdpsrp (http)</button>
+        <button data-endpoint="https://httpbin.org/get" class="endpoint active">httpbin (https)</button>
+      </div>
+      <div id="levels-list" style="max-height:40vh;overflow:auto;"></div>
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>
